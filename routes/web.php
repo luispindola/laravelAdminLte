@@ -22,3 +22,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dash.index');
+
+Route::get('/users',[App\Http\Controllers\User_controller::class, 'index']);
