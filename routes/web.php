@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +25,9 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dash.index');
 
-Route::get('/users',[App\Http\Controllers\User_controller::class, 'index']);
+//Route::get('/users',[App\Http\Controllers\User_controller::class, 'index']);
+
+Route::group(['middleware'  =>  ['auth']],function(){
+    Route::resource('roles',RolController::class);
+    Route::resource('users',UserController::class);
+});

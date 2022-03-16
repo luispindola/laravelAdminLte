@@ -15,6 +15,11 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0">
+        @can('crear-rol')
+            
+            <a class="btn btn-warning" href="{{ route('users.create') }}">Nuevo</a>                        
+                
+        @endcan
         <table class="table table-hover text-nowrap">
           <thead>
             <tr>
@@ -40,12 +45,8 @@
                     else {echo('&desc=0');}
                 } else {echo('&desc=0');}
                 ?>">Email</a></th>
-              <th><a href="{{ url('/users') }}?sort=password<?php 
-                if(isset($_GET['sort']) AND ($_GET['sort']=='password')){
-                    if($_GET['desc']==0){echo('&desc=1');} 
-                    else {echo('&desc=0');}
-                } else {echo('&desc=0');}
-                ?>">Password</a></th>
+              <th>Rol</th>              
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -54,7 +55,24 @@
                 <td>{{$user->id}}</td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
-                <td>{{$user->password}}</td>                
+                <td>
+                  @if(!empty($user->getRoleNames()))
+                    @foreach($user->getRoleNames() as $rolNombre)                                       
+                      <h5><span class="badge badge-dark">{{ $rolNombre }}</span></h5>
+                    @endforeach
+                  @endif
+                </td>
+                <td>
+                  @can('editar-user')
+                      <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
+                  @endcan
+                  
+                  @can('borrar-user')
+                      {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+                          {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
+                      {!! Form::close() !!}
+                  @endcan
+                </td>                
             </tr>
           @endforeach
           </tbody>

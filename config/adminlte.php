@@ -258,11 +258,13 @@ return [
             'text' => 'Usuarios',
             'url'  => 'users',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'ver-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'text' => 'Roles',
+            'url'  => 'roles',
             'icon' => 'fas fa-fw fa-lock',
+            'can'  => 'ver-rol',
         ],
         [
             'text'    => 'multilevel',
