@@ -53,7 +53,7 @@
 
 		<div class="mb-3">
 		  <label for="confirm-password" class="form-label">Roles:</label>
-		  {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control', 'placeholder' => 'Seleccione un rol...')) !!}
+		  {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control', 'placeholder' => 'Seleccione uno o varios roles...','multiple')) !!}
 		  @error('roles')<div class="alert alert-danger">{{ $message }}</div>@enderror
 		</div>
 

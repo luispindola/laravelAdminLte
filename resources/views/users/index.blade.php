@@ -15,7 +15,7 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0">
-        @can('crear-rol')
+        @can('crear-user')
             
             <a class="btn btn-warning" href="{{ route('users.create') }}">Nuevo</a>                        
                 
@@ -72,6 +72,7 @@
                           {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
                       {!! Form::close() !!}
                   @endcan
+                      <a class="btn btn-default" href="{{url('/users/'.$user->id.'/dompdf')}}">PDF</a>
                 </td>                
             </tr>
           @endforeach

@@ -21,13 +21,18 @@ Route::get('/', function () {
 });
 */
 
-Auth::routes();
 
+//Ruta HOME:
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dash.index');
-
-//Route::get('/users',[App\Http\Controllers\User_controller::class, 'index']);
+//Rutas de autenticación
+Auth::routes();
 
 Route::group(['middleware'  =>  ['auth']],function(){
     Route::resource('roles',RolController::class);
+
+    //Prueba domPDF
+    Route::get('/users/{user_id}/dompdf',[UserController::class,'dompdf'])->name('users.dompdf');
+
     Route::resource('users',UserController::class);
+    
 });

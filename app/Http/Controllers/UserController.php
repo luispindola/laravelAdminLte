@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 
+//DomPDF
+use PDF;
+
 
 class UserController extends Controller
 {
@@ -125,7 +128,7 @@ class UserController extends Controller
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
-    
+        dd($request);
         $input = $request->all();
         if(!empty($input['password'])){ 
             $input['password'] = Hash::make($input['password']);
@@ -152,5 +155,12 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('users.index');
+    }
+
+    public function dompdf($user_id)
+    {        
+        $user = User::find($user_id);
+        $pdf = PDF::loadHTML('<p>Usuario: '.$user->name.'</p>');
+        return $pdf->download('prueba.pdf');
     }
 }
